@@ -1,0 +1,1 @@
+let u = document.getElementById('loginform-username');u.value = '$username';let p = document.getElementById('loginform-password');p.value = '$password';let x = document.getElementsByClassName("btn btn-primary btn-block").click();
