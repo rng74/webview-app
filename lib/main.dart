@@ -60,16 +60,11 @@ class MyCustomForm extends StatefulWidget {
 }
 
 class MyCustomFormState extends State<MyCustomForm> {
-  // Create a global key that will uniquely identify the Form widget and allow
-  // us to validate the form
-  //
-  // Note: This is a GlobalKey<FormState>, not a GlobalKey<MyCustomFormState>!
   final _formKey = GlobalKey<FormState>();
   String login, password;
 
   @override
   Widget build(BuildContext context) {
-    // Build a Form widget using the _formKey we created above
     return Form(
       key: _formKey,
       child: Column(
