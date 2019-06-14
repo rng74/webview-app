@@ -34,9 +34,19 @@ class MainWebView extends StatelessWidget {
   int time = 0;
 
   Future<String> loadJS(String username, String password) async {
+
+    flutterWebViewPlugin.onHttpError.listen((onData) {
+      if (onData.runtimeType == WebViewHttpError) {
+        flutterWebViewPlugin.show();
+      }
+    });
+
     flutterWebViewPlugin.onStateChanged.listen((state) {
       if (state.type == WebViewState.finishLoad) {
-        time++;
+        if (time < 2) {
+          time++;
+        }
+
         if (time == 2) {
           flutterWebViewPlugin.show();
         }
