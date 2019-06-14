@@ -31,15 +31,17 @@ class MainWebView extends StatelessWidget {
   }
 
   final flutterWebViewPlugin = new FlutterWebviewPlugin();
+  int time = 0;
 
   Future<String> loadJS(String username, String password) async {
-//    read();
-//    flutterWebViewPlugin.reload();
     flutterWebViewPlugin.onStateChanged.listen((state) {
       if (state.type == WebViewState.finishLoad) {
+        time++;
+        if (time == 2) {
+          flutterWebViewPlugin.show();
+        }
         flutterWebViewPlugin.evalJavascript("let us = document.getElementById('loginform-username');us.value = '$username';let pa = document.getElementById('loginform-password');pa.value = '$password';let xa = document.getElementsByClassName('btn btn-primary btn-block')[1].click();");
       }
-
     });
   }
 
@@ -52,6 +54,7 @@ class MainWebView extends StatelessWidget {
       'apikey': '52009ff562107968a258b8a91a2ed06cd5271f27',
       'Content-Type': 'application/json'
     };
+    flutterWebViewPlugin.hide();
     return WebviewScaffold(
       url: 'https://demo.fhs.kz/auth/login',
       withLocalStorage: true,
@@ -60,7 +63,5 @@ class MainWebView extends StatelessWidget {
       withZoom: true,
       scrollBar: false,
     );
-
-
   }
 }
